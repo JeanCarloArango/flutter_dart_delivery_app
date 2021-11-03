@@ -14,7 +14,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Delivery App',
-      theme: ThemeData.light(),
+      theme: ThemeData(
+        fontFamily: 'Arvo',
+      ),
       home: HomePage(),
     );
   }
