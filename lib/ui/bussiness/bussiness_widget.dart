@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:delivery_app/common/categories_bar_widget.dart';
 import 'package:delivery_app/common/menu_widget.dart';
+import 'package:delivery_app/common/search_bar_widget.dart';
 import 'package:delivery_app/ui/home_page.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +27,22 @@ class BussinessWidget extends StatelessWidget {
         backgroundColor: mainColor,
       ),
       drawer: MenuWidget(),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const SearchBarWidget(),
+            CategoriesWidget(),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: mainColor,
         child: const Icon(Icons.home),
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (_) => HomePage(),
+              builder: (_) => const HomePage(),
             ),
           );
         },
