@@ -1,4 +1,4 @@
-import 'package:delivery_app/common/category_box_widget.dart';
+import 'package:delivery_app/common/category/category_box_widget.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesWidget extends StatelessWidget {
@@ -7,7 +7,7 @@ class CategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: EdgeInsets.symmetric(vertical: 20),
       child: SizedBox(
         height: 50,
         child: ListView(

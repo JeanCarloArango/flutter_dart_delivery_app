@@ -15,7 +15,7 @@ class ListWidget extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       title: Padding(
-        padding: const EdgeInsets.all(15),
+        padding: EdgeInsets.all(15),
         child: Row(
           children: [
             Row(
@@ -33,7 +33,7 @@ class ListWidget extends StatelessWidget {
             Expanded(
               child: AutoSizeText(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 24,
                 ),
                 maxLines: 2,
