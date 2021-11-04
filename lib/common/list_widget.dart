@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class ListWidget extends StatelessWidget {
@@ -16,24 +17,28 @@ class ListWidget extends StatelessWidget {
       title: Padding(
         padding: const EdgeInsets.all(15),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Row(
               children: [
                 Icon(
                   rowIcon,
-                  size: 40,
+                  size: 30,
                 ),
                 Icon(
                   rowIconOp,
-                  size: 30,
+                  size: 20,
                 ),
               ],
             ),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 25,
+            Expanded(
+              child: AutoSizeText(
+                title,
+                style: const TextStyle(
+                  fontSize: 24,
+                ),
+                maxLines: 2,
+                minFontSize: 10,
+                maxFontSize: 25,
               ),
             ),
           ],

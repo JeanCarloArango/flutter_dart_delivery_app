@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/common/menu_widget.dart';
 import 'package:delivery_app/ui/home_page.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
@@ -12,12 +13,14 @@ class BussinessWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80.0,
-        title: const Text(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.07,
+        title: const AutoSizeText(
           'Negocios Registrados',
           style: TextStyle(
             fontSize: 25,
           ),
+          maxFontSize: 30,
+          minFontSize: 20,
         ),
         backgroundColor: mainColor,
       ),

@@ -7,3 +7,5 @@ const fontFamilySrc = 'assets/fonts/';
 final mainColor = Colors.amber[900];
 
 var selectedItem = 0;
+
+const double menuWidth = 0.75;

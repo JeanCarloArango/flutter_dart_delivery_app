@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/common/list_widget.dart';
 import 'package:delivery_app/ui/bussiness/bussiness_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
@@ -24,21 +25,24 @@ class MenuWidget extends StatelessWidget {
         bottomRight: borderRadius,
       ),
       child: SizedBox(
-        width: 400,
+        width: MediaQuery.of(context).size.width * menuWidth,
         child: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
                 child: const Center(
-                  child: Text(
+                  child: AutoSizeText(
                     'Menu Principal',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 30,
+                      fontSize: 35,
                       fontFamily: 'Arvo',
                     ),
+                    maxLines: 1,
+                    minFontSize: 25,
+                    maxFontSize: 35,
                   ),
                 ),
                 decoration: BoxDecoration(
