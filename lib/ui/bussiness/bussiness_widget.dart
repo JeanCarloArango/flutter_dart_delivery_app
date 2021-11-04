@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:delivery_app/common/bussiness_item_widget.dart';
 import 'package:delivery_app/common/categories_bar_widget.dart';
 import 'package:delivery_app/common/menu_widget.dart';
 import 'package:delivery_app/common/search_bar_widget.dart';
@@ -9,7 +10,13 @@ import 'package:flutter/material.dart';
 class BussinessWidget extends StatelessWidget {
   const BussinessWidget({Key? key}) : super(key: key);
 
-  void ET() {}
+  void ET(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => const HomePage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +38,22 @@ class BussinessWidget extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            const SearchBarWidget(),
+            SearchBarWidget(),
             CategoriesWidget(),
+            Expanded(
+              child: ListView(
+                children: [
+                  BussinessItemWidget(),
+                ],
+              ),
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: mainColor,
         child: const Icon(Icons.home),
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => const HomePage(),
-            ),
-          );
-        },
+        onPressed: () => ET(context),
       ),
     );
   }
