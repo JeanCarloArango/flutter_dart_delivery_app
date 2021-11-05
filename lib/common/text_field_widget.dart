@@ -8,7 +8,6 @@ class TextFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.9,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: TextField(

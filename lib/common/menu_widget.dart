@@ -1,7 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/common/list_widget.dart';
 import 'package:delivery_app/ui/bussiness/bussiness_page.dart';
-import 'package:delivery_app/ui/customer/add_customer_page.dart';
+import 'package:delivery_app/ui/customer/add/add_customer_page.dart';
+import 'package:delivery_app/ui/customer/update/update_customer_page.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,13 @@ class MenuWidget extends StatelessWidget {
     );
   }
 
-  void goUpCstmr(BuildContext c) {}
+  void goUpCstmr(BuildContext c) {
+    Navigator.of(c).push(
+      MaterialPageRoute(
+        builder: (_) => UpdateCustomerForm(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +41,7 @@ class MenuWidget extends StatelessWidget {
         bottomRight: borderRadius,
       ),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.75,
+        width: screenWidth(context) * 0.75,
         child: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,

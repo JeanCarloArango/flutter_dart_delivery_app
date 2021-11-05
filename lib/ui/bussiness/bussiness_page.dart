@@ -10,6 +10,15 @@ import 'package:flutter/material.dart';
 class BussinessWidget extends StatelessWidget {
   const BussinessWidget({Key? key}) : super(key: key);
 
+  void showBussinessInfo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return Container();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +47,9 @@ class BussinessWidget extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  BussinessItemWidget(),
+                  BussinessItemWidget(
+                    () => showBussinessInfo(context),
+                  ),
                 ],
               ),
             )
