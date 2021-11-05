@@ -1,11 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:delivery_app/model/bussiness.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
 class BussinessItemWidget extends StatelessWidget {
+  final Bussiness bussiness;
   final VoidCallback onTap;
 
-  const BussinessItemWidget(this.onTap);
+  const BussinessItemWidget(this.bussiness, this.onTap);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class BussinessItemWidget extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       AutoSizeText(
-                        '1st Street New York',
+                        'Restaurante',
                         style: TextStyle(
                           fontSize: 25,
                           letterSpacing: 2,

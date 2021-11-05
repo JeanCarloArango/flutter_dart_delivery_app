@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delivery_app/common/action_button.dart';
-import 'package:delivery_app/common/menu_widget.dart';
-import 'package:delivery_app/common/text_field_widget.dart';
+import 'package:delivery_app/ui/common/action_button.dart';
+import 'package:delivery_app/ui/common/menu_widget.dart';
+import 'package:delivery_app/ui/common/text_field_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 

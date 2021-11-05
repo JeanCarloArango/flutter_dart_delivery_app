@@ -1,4 +1,4 @@
-import 'package:delivery_app/common/category/category_box_widget.dart';
+import 'package:delivery_app/ui/common/category/category_box_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
