@@ -1,27 +1,34 @@
 import 'package:delivery_app/model/bussiness.dart';
 
 class BussinessDao {
-  List<Bussiness> bussinesses = [
+  final List<Bussiness> bussinesses = [
     Bussiness(
       'Dante\'s Ristorante',
       'Restaurante',
       'address',
       'Comida Tipica Italiana',
-      ['Comida'],
+      'Comida',
     ),
     Bussiness(
       'McGyver Tools',
       'Ferreteria',
       'address',
       'Las mejores Herramientas',
-      ['Herramientas'],
+      'Herramientas',
     ),
     Bussiness(
       'Jekyll Medicamenets',
       'Drogueria',
       'address',
       'Curamos todos sus males',
-      ['Medicamentos'],
+      'Medicamentos',
     ),
+    // Bussiness(
+    //   'Apple',
+    //   'Tec',
+    //   'address',
+    //   'Los dejamos sin un centavo',
+    //   ['Herramientas'],
+    // ),
   ];
 }

@@ -5,14 +5,22 @@ import 'package:flutter/material.dart';
 
 class BussinessItemWidget extends StatelessWidget {
   final Bussiness bussiness;
-  final VoidCallback onTap;
 
-  const BussinessItemWidget(this.bussiness, this.onTap);
+  const BussinessItemWidget(this.bussiness);
+
+  void showBussinessInfo(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return Container();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => showBussinessInfo(context),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Container(

@@ -1,13 +1,12 @@
+import 'package:delivery_app/model/categories.dart';
 import 'package:delivery_app/ui/common/category/category_box_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesWidget extends StatelessWidget {
-  const CategoriesWidget({Key? key}) : super(key: key);
+  CategoriesWidget({Key? key}) : super(key: key);
 
-  void filterCategory() {
-    print('works');
-  }
+  final cats = categories;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +14,15 @@ class CategoriesWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: SizedBox(
         height: screenHeight(context) * 0.05,
-        child: ListView(
+        child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          children: [
-            CategoryBoxWidget(
-              'Food',
-              () => filterCategory(),
-            ),
-          ],
+          itemCount: cats.length,
+          itemBuilder: (context, index) {
+            final category = cats[index];
+            return CategoryBoxWidget(
+              text: category,
+            );
+          },
         ),
       ),
     );

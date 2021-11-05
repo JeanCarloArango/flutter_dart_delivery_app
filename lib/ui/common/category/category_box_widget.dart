@@ -5,30 +5,26 @@ import 'package:flutter/material.dart';
 class CategoryBoxWidget extends StatelessWidget {
 
   final String text;
-  final VoidCallback onTap;
 
-  CategoryBoxWidget(this.text, this.onTap);
+  CategoryBoxWidget({required this.text});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          color: Colors.grey[300],
-        ),
-        width: screenWidth(context) * 0.3,
-        child: Center(
-          child: AutoSizeText(
-            text,
-            style: TextStyle(
-              fontSize: 20,
-            ),
-            maxLines: 1,
-            maxFontSize: 25,
-            minFontSize: 10,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: Colors.grey[300],
+      ),
+      width: screenWidth(context) * 0.3,
+      child: Center(
+        child: AutoSizeText(
+          text,
+          style: TextStyle(
+            fontSize: 20,
           ),
+          maxLines: 1,
+          maxFontSize: 25,
+          minFontSize: 10,
         ),
       ),
     );

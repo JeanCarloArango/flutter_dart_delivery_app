@@ -3,8 +3,8 @@ class Bussiness {
   final String type;
   final String address;
   final String description;
-  final List<String> categories;
+  final String category;
 
   Bussiness(
-      this.name, this.type, this.address, this.description, this.categories);
+      this.name, this.type, this.address, this.description, this.category);
 }
