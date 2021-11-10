@@ -20,52 +20,58 @@ class _BussinessWidgetState extends State<BussinessWidget> {
 
   @override
   void initState() {
-    bd.requestData();
+    bd.requestBussiness();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        animation: bd,
-        builder: (context, child) {
-          return Scaffold(
-            appBar: AppBar(
-              title: AutoSizeText(
-                'Negocios Registrados',
-                style: TextStyle(
-                  fontSize: 25,
+      animation: bd,
+      builder: (context, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: AutoSizeText(
+              'Negocios Registrados',
+              style: TextStyle(
+                fontSize: 25,
+              ),
+              maxLines: 1,
+              maxFontSize: 25,
+              minFontSize: 10,
+            ),
+            backgroundColor: mainColor,
+          ),
+          drawer: MenuWidget(),
+          body: Padding(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Column(
+              children: [
+                TextFieldWidget(
+                  Icons.search,
+                  'Buscar Negocio',
                 ),
-                maxLines: 1,
-                maxFontSize: 25,
-                minFontSize: 10,
-              ),
-              backgroundColor: mainColor,
-            ),
-            drawer: MenuWidget(),
-            body: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  TextFieldWidget(
-                    Icons.search,
-                    'Buscar Negocio',
+                CategoriesWidget(),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: bd.bussinesses.length,
+                    itemBuilder: (context, index) {
+                      final b = bd.bussinesses[index];
+                      return BussinessItemWidget(b);
+                    },
                   ),
-                  CategoriesWidget(),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: bd.bussinesses.length,
-                      itemBuilder: (context, index) {
-                        final b = bd.bussinesses[index];
-                        return BussinessItemWidget(b);
-                      },
-                    ),
+                ),
+                if (bd.loading)
+                  Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: CircularProgressIndicator(),
                   ),
-                ],
-              ),
+              ],
             ),
-            floatingActionButton: HomeButton(),
-          );
-        });
+          ),
+          floatingActionButton: HomeButton(),
+        );
+      },
+    );
   }
 }

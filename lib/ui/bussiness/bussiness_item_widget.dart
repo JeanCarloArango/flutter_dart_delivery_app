@@ -11,6 +11,8 @@ class BussinessItemWidget extends StatelessWidget {
   void showBussinessInfo(BuildContext context) {
     showModalBottomSheet(
       context: context,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(30))),
       builder: (_) {
         return Container();
       },
@@ -36,7 +38,7 @@ class BussinessItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                    width: screenWidth(context) * 0.6,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -49,8 +51,8 @@ class BussinessItemWidget extends StatelessWidget {
                           ),
                           maxLines: 1,
                           maxFontSize: 30,
-                          minFontSize: 15,
-                          overflow: TextOverflow.ellipsis,
+                          minFontSize: 25,
+                          overflow: TextOverflow.fade,
                         ),
                         AutoSizeText(
                           bussiness.type,

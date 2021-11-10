@@ -1,16 +1,19 @@
 import 'package:delivery_app/model/bussiness.dart';
+import 'package:delivery_app/persistence/data_constraints.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class BussinessDao extends ChangeNotifier {
-  
   List<Bussiness> bussinesses = [];
+  bool loading = false;
 
-  requestData() async {
+  void requestBussiness() async {
+    loading = true;
+    notifyListeners();
+
     var data = await http.get(
-      Uri.parse(
-          'https://script.google.com/macros/s/AKfycbzMZocxkhaZySd4HE9Zq4qZnZI-R7_ZKFxQ2hXRcIXZg3U289WenjfAeWMjun5mfn4H/exec'),
+      Uri.parse(apiUrl),
     );
     var json = convert.jsonDecode(data.body) as List;
     bussinesses = json
@@ -18,6 +21,8 @@ class BussinessDao extends ChangeNotifier {
           (e) => Bussiness.fromJson(e),
         )
         .toList();
+
+    loading = false;
     notifyListeners();
   }
 
