@@ -53,19 +53,20 @@ class _BussinessWidgetState extends State<BussinessWidget> {
                 ),
                 CategoriesWidget(),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: bd.bussinesses.length,
-                    itemBuilder: (context, index) {
-                      final b = bd.bussinesses[index];
-                      return BussinessItemWidget(b);
-                    },
-                  ),
+                  child: bd.loading
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: mainColor,
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: bd.bussinesses.length,
+                          itemBuilder: (context, index) {
+                            final b = bd.bussinesses[index];
+                            return BussinessItemWidget(b);
+                          },
+                        ),
                 ),
-                if (bd.loading)
-                  Padding(
-                    padding: const EdgeInsets.all(30),
-                    child: CircularProgressIndicator(),
-                  ),
               ],
             ),
           ),
