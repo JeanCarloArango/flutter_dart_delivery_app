@@ -5,21 +5,16 @@ import 'package:flutter/material.dart';
 
 class CategoryBoxWidget extends StatelessWidget {
   final String text;
+  VoidCallback onTap;
+
+  CategoryBoxWidget({required this.text, required this.onTap});
 
   final bd = BussinessDao();
-
-  // void handleFilter(String category) {
-  //   bd.filterBussiness(category);
-  // }
-
-  CategoryBoxWidget({required this.text});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   handleFilter(text);
-      // },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(

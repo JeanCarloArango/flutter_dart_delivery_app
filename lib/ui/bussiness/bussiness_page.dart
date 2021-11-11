@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/persistence/bussiness_dao.dart';
 import 'package:delivery_app/ui/bussiness/bussiness_item_widget.dart';
-import 'package:delivery_app/ui/common/category/categories_bar_widget.dart';
+import 'package:delivery_app/ui/common/category/category_box_widget.dart';
 import 'package:delivery_app/ui/common/home_button.dart';
 import 'package:delivery_app/ui/common/menu_widget.dart';
 import 'package:delivery_app/ui/common/text_field_widget.dart';
@@ -20,6 +20,7 @@ class _BussinessWidgetState extends State<BussinessWidget> {
 
   @override
   void initState() {
+    bd.requestCategories();
     bd.requestBussiness();
     super.initState();
   }
@@ -51,7 +52,30 @@ class _BussinessWidgetState extends State<BussinessWidget> {
                   Icons.search,
                   'Buscar Negocio',
                 ),
-                CategoriesWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: SizedBox(
+                    height: screenHeight(context) * 0.05,
+                    child: bd.loading
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              color: mainColor,
+                            ),
+                          )
+                        : ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: bd.categories.length,
+                            itemBuilder: (context, index) {
+                              final category = bd.categories[index];
+                              // print(category.name);
+                              return CategoryBoxWidget(
+                                text: category.name,
+                                onTap: () => bd.filterBussiness(category.name),
+                              );
+                            },
+                          ),
+                  ),
+                ),
                 Expanded(
                   child: bd.loading
                       ? Center(
