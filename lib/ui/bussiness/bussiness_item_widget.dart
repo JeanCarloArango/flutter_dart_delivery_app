@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/model/bussiness.dart';
+import 'package:delivery_app/ui/bussiness/bussiness_info_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -12,9 +13,12 @@ class BussinessItemWidget extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(30))),
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
+        ),
+      ),
       builder: (_) {
-        return Container();
+        return BussinessInfoWidget(bussiness: bussiness);
       },
     );
   }
@@ -81,7 +85,7 @@ class BussinessItemWidget extends StatelessWidget {
                     width: screenWidth(context) * 0.2,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.asset('assets/logoTest.png'),
+                      child: Image.network(bussiness.Logo),
                     ),
                   ),
                 ],

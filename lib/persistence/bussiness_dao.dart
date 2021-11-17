@@ -8,6 +8,7 @@ import 'dart:convert' as convert;
 class BussinessDao extends ChangeNotifier {
   List<Bussiness> bussinesses = [];
   List<Category> categories = [];
+  List<String> products = [];
   bool loading = false;
   List<String> acc = ['C', 'R', 'U', 'D', 'F'];
 
@@ -16,10 +17,10 @@ class BussinessDao extends ChangeNotifier {
     notifyListeners();
 
     var data = await http.get(
-      Uri.parse('${apiUrl}acc=${acc[1]}&tbl=Bussinesses'),
+      Uri.parse('$apiUrl${acc[1]}&tbl=Bussinesses'),
     );
+    // print(data.body);
     var json = convert.jsonDecode(data.body);
-    // print(json);
     var bussinessData = json['data'] as List;
     bussinesses = bussinessData.map((e) => Bussiness.fromJson(e)).toList();
 
@@ -32,7 +33,7 @@ class BussinessDao extends ChangeNotifier {
     notifyListeners();
 
     var data = await http.get(
-      Uri.parse('${apiUrl}acc=${acc[1]}&tbl=Categories'),
+      Uri.parse('$apiUrl${acc[1]}&tbl=Categories'),
     );
     var json = convert.jsonDecode(data.body);
     // print(json);
@@ -52,7 +53,7 @@ class BussinessDao extends ChangeNotifier {
     }
 
     var data = await http.get(
-      Uri.parse('${apiUrl}acc=${acc[4]}&cat=$category'),
+      Uri.parse('$apiUrl${acc[4]}&cat=$category'),
     );
     var json = convert.jsonDecode(data.body);
     // print(json);
