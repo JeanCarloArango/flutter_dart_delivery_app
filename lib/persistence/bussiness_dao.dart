@@ -63,4 +63,25 @@ class BussinessDao extends ChangeNotifier {
     loading = false;
     notifyListeners();
   }
+
+  Future<String> insert(String data) async {
+    loading = true;
+    notifyListeners();
+
+    var response = await http.get(
+      Uri.parse('$apiUrl${acc[0]}&tbl=Customers&data=$data'),
+    );
+
+    if (response.statusCode == 200) {
+      loading = false;
+      notifyListeners();
+
+      return response.body;
+    } else {
+      loading = false;
+      notifyListeners();
+
+      return 'Response status : ${response.statusCode}';
+    }
+  }
 }

@@ -1,8 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delivery_app/ui/common/action_button.dart';
+import 'package:delivery_app/ui/common/form_widget.dart';
 import 'package:delivery_app/ui/common/home_button.dart';
 import 'package:delivery_app/ui/common/menu_widget.dart';
-import 'package:delivery_app/ui/common/text_field_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -40,28 +39,8 @@ class AddCustomerForm extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: ListView(
-                    children: [
-                      TextFieldWidget(null, 'Nombre:'),
-                      SizedBox(
-                        height: screenHeight(context) * 0.02,
-                      ),
-                      TextFieldWidget(null, 'Direccion:'),
-                      SizedBox(
-                        height: screenHeight(context) * 0.02,
-                      ),
-                      TextFieldWidget(null, 'Telefono:'),
-                      SizedBox(
-                        height: screenHeight(context) * 0.02,
-                      ),
-                      TextFieldWidget(null, 'Celular:'),
-                      SizedBox(
-                        height: screenHeight(context) * 0.02,
-                      ),
-                      ActionButton('Registrar'),
-                    ],
+                  child: AddFormWidget()
                   ),
-                ),
               ],
             ),
           ),
