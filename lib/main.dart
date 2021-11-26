@@ -23,7 +23,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Arvo',
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

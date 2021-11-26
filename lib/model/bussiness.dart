@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'dart:ui';
-
 Bussiness bussinessFromJson(String str) => Bussiness.fromJson(json.decode(str));
 
 String bussinessToJson(Bussiness data) => json.encode(data.toJson());
