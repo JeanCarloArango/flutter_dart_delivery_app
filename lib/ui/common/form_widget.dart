@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/persistence/bussiness_dao.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
@@ -35,9 +36,7 @@ class _AddFormWidgetState extends State<AddFormWidget> {
               }
               return null;
             },
-            decoration: InputDecoration(
-              hintText: 'Nombre: ',
-            ),
+            decoration: InputDecoration(hintText: 'Nombre: '),
           ),
           TextFormField(
             validator: (value) {
@@ -99,7 +98,13 @@ class _AddFormWidgetState extends State<AddFormWidget> {
                 );
               }
             },
-            child: const Text('Enviar'),
+            child: const AutoSizeText(
+              'Enviar',
+              style: TextStyle(fontSize: 25),
+              maxFontSize: 25,
+              maxLines: 1,
+              minFontSize: 20,
+            ),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(mainColor),
             ),

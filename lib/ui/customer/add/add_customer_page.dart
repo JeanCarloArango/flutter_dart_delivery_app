@@ -13,7 +13,7 @@ class AddCustomerForm extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: screenHeight(context) * 0.07,
-        title: AutoSizeText(
+        title: const AutoSizeText(
           'Registrar Cliente',
           style: TextStyle(
             fontSize: 25,

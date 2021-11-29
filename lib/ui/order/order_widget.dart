@@ -1,21 +1,33 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delivery_app/ui/common/action_button.dart';
+import 'package:delivery_app/persistence/bussiness_dao.dart';
 import 'package:delivery_app/ui/common/home_button.dart';
 import 'package:delivery_app/ui/common/menu_widget.dart';
-import 'package:delivery_app/ui/common/text_field_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
-class UpdateCustomerForm extends StatelessWidget {
-  const UpdateCustomerForm({Key? key}) : super(key: key);
+class OrderWidget extends StatefulWidget {
+  OrderWidget({Key? key}) : super(key: key);
+
+  @override
+  State<OrderWidget> createState() => _OrderWidgetState();
+}
+
+class _OrderWidgetState extends State<OrderWidget> {
+  final db = BussinessDao();
+
+  @override
+  void initState() {
+    db.requestBussiness();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: screenHeight(context) * 0.07,
-        title: AutoSizeText(
-          'Actualizar Cliente',
+        title: const AutoSizeText(
+          'Agregar Pedido',
           style: TextStyle(
             fontSize: 25,
           ),
@@ -30,7 +42,7 @@ class UpdateCustomerForm extends StatelessWidget {
         child: Container(
           constraints: BoxConstraints(maxWidth: screenWidth(context) * 0.8),
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(40),
             child: Column(
               children: [
                 Center(
@@ -38,39 +50,26 @@ class UpdateCustomerForm extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.person,
+                        Icons.fastfood_outlined,
                         size: screenWidth(context) * 0.4,
                       ),
                       Icon(
-                        Icons.create,
+                        Icons.add,
                         size: screenWidth(context) * 0.2,
                       ),
                     ],
                   ),
                 ),
                 Expanded(
-                  child: ListView(
-                    children: [
-                      TextFieldWidget(null, 'Nombre:'),
-                      ActionButton('Consultar'),
-                      SizedBox(
-                        height: screenHeight(context) * 0.02,
-                      ),
-                      TextFieldWidget(null, 'Direccion:'),
-                      SizedBox(
-                        height: screenHeight(context) * 0.01,
-                      ),
-                      TextFieldWidget(null, 'Telefono:'),
-                      SizedBox(
-                        height: screenHeight(context) * 0.01,
-                      ),
-                      TextFieldWidget(null, 'Celular:'),
-                      SizedBox(
-                        height: screenHeight(context) * 0.01,
-                      ),
-                      ActionButton('Actualizar'),
-                    ],
-                  ),
+                  child: db.loading
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: mainColor,
+                          ),
+                        )
+                      : Column(
+                          children: [],
+                        ),
                 ),
               ],
             ),

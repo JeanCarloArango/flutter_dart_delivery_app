@@ -3,6 +3,7 @@ import 'package:delivery_app/ui/bussiness/bussiness_page.dart';
 import 'package:delivery_app/ui/common/list_widget.dart';
 import 'package:delivery_app/ui/customer/add/add_customer_page.dart';
 import 'package:delivery_app/ui/customer/update/update_customer_page.dart';
+import 'package:delivery_app/ui/order/order_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +30,14 @@ class MenuWidget extends StatelessWidget {
     Navigator.of(c).push(
       MaterialPageRoute(
         builder: (_) => UpdateCustomerForm(),
+      ),
+    );
+  }
+
+  void goOrder(BuildContext c) {
+    Navigator.of(c).push(
+      MaterialPageRoute(
+        builder: (_) => OrderWidget(),
       ),
     );
   }
@@ -81,6 +90,12 @@ class MenuWidget extends StatelessWidget {
                 Icons.person,
                 Icons.create,
                 () => goUpCstmr(context),
+              ),
+              ListWidget(
+                'Agregar Pedido',
+                Icons.fastfood_outlined,
+                Icons.add,
+                () => goOrder(context),
               ),
             ],
           ),

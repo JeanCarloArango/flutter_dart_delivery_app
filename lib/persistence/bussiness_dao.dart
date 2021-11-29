@@ -11,6 +11,7 @@ class BussinessDao extends ChangeNotifier {
   List<String> products = [];
   bool loading = false;
   List<String> acc = ['C', 'R', 'U', 'D', 'F'];
+  String test = '';
 
   void requestBussiness() async {
     loading = true;
@@ -19,10 +20,11 @@ class BussinessDao extends ChangeNotifier {
     var data = await http.get(
       Uri.parse('$apiUrl${acc[1]}&tbl=Bussinesses'),
     );
-    // print(data.body);
+    print(data.body);
     var json = convert.jsonDecode(data.body);
     var bussinessData = json['data'] as List;
     bussinesses = bussinessData.map((e) => Bussiness.fromJson(e)).toList();
+    print(bussinesses);
 
     loading = false;
     notifyListeners();
@@ -48,10 +50,13 @@ class BussinessDao extends ChangeNotifier {
     loading = true;
     notifyListeners();
 
-    if (category == 'Todos') {
-      requestBussiness();
+    for (var i = 0; i < categories.length; i++) {
+      if (category == categories[0].name) {
+        requestBussiness();
+      }
     }
 
+    bussinesses = [];
     var data = await http.get(
       Uri.parse('$apiUrl${acc[4]}&cat=$category'),
     );
