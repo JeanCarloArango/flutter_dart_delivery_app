@@ -12,6 +12,8 @@ class BussinessDao extends ChangeNotifier {
   bool loading = false;
   List<String> acc = ['C', 'R', 'U', 'D', 'F'];
   String test = '';
+  List<String> itemName = [];
+  List<String> bProducts = [];
 
   void requestBussiness() async {
     loading = true;
@@ -20,11 +22,13 @@ class BussinessDao extends ChangeNotifier {
     var data = await http.get(
       Uri.parse('$apiUrl${acc[1]}&tbl=Bussinesses'),
     );
-    print(data.body);
+    // print(data.body);
     var json = convert.jsonDecode(data.body);
     var bussinessData = json['data'] as List;
     bussinesses = bussinessData.map((e) => Bussiness.fromJson(e)).toList();
-    print(bussinesses);
+    // print(bussinesses);
+
+    getBussinessData();
 
     loading = false;
     notifyListeners();
@@ -56,7 +60,6 @@ class BussinessDao extends ChangeNotifier {
       }
     }
 
-    bussinesses = [];
     var data = await http.get(
       Uri.parse('$apiUrl${acc[4]}&cat=$category'),
     );
@@ -88,5 +91,13 @@ class BussinessDao extends ChangeNotifier {
 
       return 'Response status : ${response.statusCode}';
     }
+  }
+
+  void getBussinessData() {
+    for (var i = 0; i < bussinesses.length; i++) {
+      itemName.add(bussinesses[i].name);
+      products.add(bussinesses[i].Products);
+    }
+    // print(itemName);
   }
 }
