@@ -67,7 +67,7 @@ class _BussinessWidgetState extends State<BussinessWidget> {
                             onTap: () => bd.filterBussiness(category.name),
                           );
                         },
-                      )),
+                      ),),
                 ),
                 Expanded(
                   child: bd.loading

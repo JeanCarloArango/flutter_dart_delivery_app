@@ -16,7 +16,8 @@ class OrderWidget extends StatefulWidget {
 class _OrderWidgetState extends State<OrderWidget> {
   final _orderK = GlobalKey<FormState>();
   final db = BussinessDao();
-  String? _dropdownValue;
+  String? _dropdownBussValue;
+  String? _dropdownPrValue;
   var _quantity;
   var _cstmrDni;
 
@@ -98,7 +99,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                                     const SizedBox(
                                       height: 20,
                                     ),
-                                    DropdownButton<String>(
+                                    DropdownButtonFormField<String>(
                                       isExpanded: true,
                                       items: db.itemName
                                           .map<DropdownMenuItem<String>>(
@@ -120,10 +121,10 @@ class _OrderWidgetState extends State<OrderWidget> {
                                       ).toList(),
                                       onChanged: (String? newValue) {
                                         setState(() {
-                                          _dropdownValue = newValue!;
+                                          _dropdownBussValue = newValue!;
                                         });
                                       },
-                                      value: _dropdownValue,
+                                      value: _dropdownBussValue,
                                       hint: Center(
                                         child: AutoSizeText(
                                           '-- Selecciona Negocio --',
@@ -159,10 +160,10 @@ class _OrderWidgetState extends State<OrderWidget> {
                                       ).toList(),
                                       onChanged: (String? newValue) {
                                         setState(() {
-                                          _dropdownValue = newValue!;
+                                          _dropdownPrValue = newValue!;
                                         });
                                       },
-                                      value: _dropdownValue,
+                                      value: _dropdownPrValue,
                                       hint: Center(
                                         child: AutoSizeText(
                                           '-- Selecciona Producto --',

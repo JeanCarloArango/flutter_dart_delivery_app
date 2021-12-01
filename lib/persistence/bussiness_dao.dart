@@ -13,7 +13,6 @@ class BussinessDao extends ChangeNotifier {
   List<String> acc = ['C', 'R', 'U', 'D', 'F'];
   String test = '';
   List<String> itemName = [];
-  List<String> bProducts = [];
 
   void requestBussiness() async {
     loading = true;
