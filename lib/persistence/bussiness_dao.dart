@@ -100,6 +100,7 @@ class BussinessDao extends ChangeNotifier {
   }
 
   String getProducts(String? bName) {
+    products = [];
     for (var i = 0; i < bussinesses.length; i++) {
       if (bussinesses[i].name == bName) {
         products.add(bussinesses[i].Products);

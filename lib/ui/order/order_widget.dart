@@ -122,6 +122,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                                       onChanged: (String? newValue) {
                                         setState(() {
                                           _dropdownBussValue = newValue!;
+                                          _dropdownPrValue = null;
                                           db.getProducts(newValue);
                                         });
                                       },
