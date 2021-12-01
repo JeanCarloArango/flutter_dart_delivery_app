@@ -95,8 +95,16 @@ class BussinessDao extends ChangeNotifier {
   void getBussinessData() {
     for (var i = 0; i < bussinesses.length; i++) {
       itemName.add(bussinesses[i].name);
-      products.add(bussinesses[i].Products);
     }
     // print(itemName);
+  }
+
+  String getProducts(String? bName) {
+    for (var i = 0; i < bussinesses.length; i++) {
+      if (bussinesses[i].name == bName) {
+        products.add(bussinesses[i].Products);
+      }
+    }
+    return products.toString();
   }
 }
