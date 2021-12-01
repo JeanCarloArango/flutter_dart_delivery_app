@@ -78,7 +78,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                               )
                             : Padding(
                                 padding: const EdgeInsets.only(top: 30),
-                                child: Column(
+                                child: ListView(
                                   children: [
                                     TextFormField(
                                       validator: (value) {
