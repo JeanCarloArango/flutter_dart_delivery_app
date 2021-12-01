@@ -99,13 +99,17 @@ class BussinessDao extends ChangeNotifier {
     // print(itemName);
   }
 
-  String getProducts(String? bName) {
+  List<String> getProducts(String? bName) {
     products = [];
     for (var i = 0; i < bussinesses.length; i++) {
       if (bussinesses[i].name == bName) {
-        products.add(bussinesses[i].Products);
+        List<String> bPr = bussinesses[i].Products.split(';');
+        for (var j = 0; j < bPr.length; j++) {
+          products.add(bPr[j]);
+        }
       }
     }
-    return products.toString();
+    // print(products);
+    return products;
   }
 }
