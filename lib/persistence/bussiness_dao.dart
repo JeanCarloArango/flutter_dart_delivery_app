@@ -71,12 +71,12 @@ class BussinessDao extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<String> insert(String data) async {
+  Future<String> insert(String data, String tbl) async {
     loading = true;
     notifyListeners();
 
     var response = await http.get(
-      Uri.parse('$apiUrl${acc[0]}&tbl=Customers&data=$data'),
+      Uri.parse('$apiUrl${acc[0]}&tbl=$tbl&data=$data'),
     );
 
     if (response.statusCode == 200) {

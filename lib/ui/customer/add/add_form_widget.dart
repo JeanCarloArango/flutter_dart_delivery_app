@@ -13,11 +13,15 @@ class AddFormWidget extends StatefulWidget {
 class _AddFormWidgetState extends State<AddFormWidget> {
   final _formK = GlobalKey<FormState>();
 
-  BussinessDao dao = BussinessDao();
+  final dao = BussinessDao();
   var _name;
   var _address;
   var _phone;
   var _celphone;
+
+  TextStyle hStyle = TextStyle(
+    fontSize: 20,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,10 @@ class _AddFormWidgetState extends State<AddFormWidget> {
               }
               return null;
             },
-            decoration: InputDecoration(hintText: 'Nombre: '),
+            decoration: InputDecoration(
+              hintText: 'Nombre: ',
+              hintStyle: hStyle,
+            ),
           ),
           TextFormField(
             validator: (value) {
@@ -51,6 +58,7 @@ class _AddFormWidgetState extends State<AddFormWidget> {
             },
             decoration: InputDecoration(
               hintText: 'Dirección: ',
+              hintStyle: hStyle,
             ),
           ),
           TextFormField(
@@ -66,6 +74,7 @@ class _AddFormWidgetState extends State<AddFormWidget> {
             },
             decoration: InputDecoration(
               hintText: 'Teléfono: ',
+              hintStyle: hStyle,
             ),
           ),
           TextFormField(
@@ -81,19 +90,40 @@ class _AddFormWidgetState extends State<AddFormWidget> {
             },
             decoration: InputDecoration(
               hintText: 'Celular: ',
+              hintStyle: hStyle,
             ),
+          ),
+          const SizedBox(
+            height: 30,
           ),
           ElevatedButton(
             onPressed: () {
               if (_formK.currentState!.validate()) {
                 String data = '$_name;$_address;$_phone;$_celphone';
-                dao.insert(data);
+                dao.insert(data, 'Customers');
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(
+                    content: AutoSizeText(
                       'Cliente $_name registrado',
+                      style: TextStyle(fontSize: 30),
+                      maxFontSize: 30,
+                      minFontSize: 20,
+                      maxLines: 1,
                     ),
                     backgroundColor: Colors.green,
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: AutoSizeText(
+                      'Cliente $_name no pudo ser registrado',
+                      style: TextStyle(fontSize: 30),
+                      maxFontSize: 30,
+                      minFontSize: 20,
+                      maxLines: 1,
+                    ),
+                    backgroundColor: Colors.red,
                   ),
                 );
               }

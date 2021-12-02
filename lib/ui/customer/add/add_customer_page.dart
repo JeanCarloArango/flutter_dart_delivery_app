@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delivery_app/ui/common/form_widget.dart';
+import 'package:delivery_app/ui/customer/add/add_form_widget.dart';
 import 'package:delivery_app/ui/common/home_button.dart';
 import 'package:delivery_app/ui/common/menu_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
