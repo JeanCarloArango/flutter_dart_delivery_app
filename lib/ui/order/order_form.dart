@@ -1,6 +1,6 @@
+import 'package:delivery_app/persistence/bussiness_dao.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delivery_app/persistence/bussiness_dao.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 
 class OrderForm extends StatefulWidget {
