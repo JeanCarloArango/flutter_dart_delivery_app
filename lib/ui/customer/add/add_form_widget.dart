@@ -135,8 +135,11 @@ class _AddFormWidgetState extends State<AddFormWidget> {
               maxLines: 1,
               minFontSize: 20,
             ),
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(mainColor),
+            style: ElevatedButton.styleFrom(
+              primary: mainColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0),
+              ),
             ),
           ),
         ],

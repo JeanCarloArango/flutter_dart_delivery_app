@@ -1,9 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/persistence/bussiness_dao.dart';
-import 'package:delivery_app/ui/common/action_button.dart';
 import 'package:delivery_app/ui/common/home_button.dart';
 import 'package:delivery_app/ui/common/menu_widget.dart';
-import 'package:delivery_app/ui/common/text_field_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +15,7 @@ class UpdateCustomerForm extends StatefulWidget {
 class _UpdateCustomerFormState extends State<UpdateCustomerForm> {
   final dao = BussinessDao();
   var _updateKey = GlobalKey<FormState>();
+  var _queryKey = GlobalKey<FormState>();
   var _dni;
   var _address;
   var _phone;
@@ -65,7 +64,7 @@ class _UpdateCustomerFormState extends State<UpdateCustomerForm> {
                 ),
                 Expanded(
                   child: Form(
-                    key: _updateKey,
+                    key: _queryKey,
                     child: ListView(
                       children: [
                         TextFormField(
@@ -86,7 +85,7 @@ class _UpdateCustomerFormState extends State<UpdateCustomerForm> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            if (_updateKey.currentState!.validate()) {
+                            if (_queryKey.currentState!.validate()) {
                               int count = await dao.filterCustomer(_dni);
                               if (count > 0) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -134,109 +133,123 @@ class _UpdateCustomerFormState extends State<UpdateCustomerForm> {
                         SizedBox(
                           height: screenHeight(context) * 0.02,
                         ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Dirección no es valida';
-                            } else {
-                              setState(() {
-                                _address = value;
-                              });
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Dirección: ',
-                            hintStyle: hStyle,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenHeight(context) * 0.01,
-                        ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Telefono no es valido';
-                            } else {
-                              setState(() {
-                                _phone = value;
-                              });
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Telefono: ',
-                            hintStyle: hStyle,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenHeight(context) * 0.01,
-                        ),
-                        TextFormField(
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Celular no es valido';
-                            } else {
-                              setState(() {
-                                _celphone = value;
-                              });
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            hintText: 'Celular: ',
-                            hintStyle: hStyle,
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenHeight(context) * 0.01,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (_updateKey.currentState!.validate()) {
-                              String data = '$_dni;$_address;$_phone;$_celphone';
-                              bool res = await dao.updateCustomer(data);
-                              if (res) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: AutoSizeText(
-                                      'Cliente $_dni Fue actualizado',
-                                      style: TextStyle(fontSize: 30),
-                                      maxFontSize: 30,
-                                      minFontSize: 20,
-                                      maxLines: 1,
-                                    ),
-                                    backgroundColor: Colors.green,
+                        Form(
+                          key: _updateKey,
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Dirección no es valida';
+                                  } else {
+                                    setState(() {
+                                      _address = value;
+                                    });
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Dirección: ',
+                                  hintStyle: hStyle,
+                                ),
+                              ),
+                              SizedBox(
+                                height: screenHeight(context) * 0.01,
+                              ),
+                              TextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Telefono no es valido';
+                                  } else {
+                                    setState(() {
+                                      _phone = value;
+                                    });
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Telefono: ',
+                                  hintStyle: hStyle,
+                                ),
+                              ),
+                              SizedBox(
+                                height: screenHeight(context) * 0.01,
+                              ),
+                              TextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Celular no es valido';
+                                  } else {
+                                    setState(() {
+                                      _celphone = value;
+                                    });
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  hintText: 'Celular: ',
+                                  hintStyle: hStyle,
+                                ),
+                              ),
+                              SizedBox(
+                                height: screenHeight(context) * 0.01,
+                              ),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  if (_updateKey.currentState!.validate()) {
+                                    String data =
+                                        '$_dni;$_address;$_phone;$_celphone';
+                                    bool res = await dao.updateCustomer(data);
+                                    if (res) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: AutoSizeText(
+                                            'Cliente $_dni Fue actualizado',
+                                            style: TextStyle(fontSize: 30),
+                                            maxFontSize: 30,
+                                            minFontSize: 20,
+                                            maxLines: 1,
+                                          ),
+                                          backgroundColor: Colors.green,
+                                        ),
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: AutoSizeText(
+                                            'Cliente $_dni no pudo ser actualizado',
+                                            style: TextStyle(fontSize: 30),
+                                            maxFontSize: 30,
+                                            minFontSize: 20,
+                                            maxLines: 1,
+                                          ),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 50),
+                                  child: AutoSizeText(
+                                    'Actualizar',
+                                    style: TextStyle(fontSize: 25),
+                                    maxFontSize: 21,
+                                    maxLines: 1,
+                                    minFontSize: 20,
                                   ),
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: AutoSizeText(
-                                      'Cliente $_dni no pudo ser actualizado',
-                                      style: TextStyle(fontSize: 30),
-                                      maxFontSize: 30,
-                                      minFontSize: 20,
-                                      maxLines: 1,
-                                    ),
-                                    backgroundColor: Colors.red,
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  primary: mainColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0),
                                   ),
-                                );
-                              }
-                            }
-                          },
-                          child: AutoSizeText(
-                            'Actualizar',
-                            style: TextStyle(fontSize: 25),
-                            maxFontSize: 21,
-                            maxLines: 1,
-                            minFontSize: 20,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: mainColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
