@@ -10,7 +10,7 @@ class BussinessDao extends ChangeNotifier {
   List<Category> categories = [];
   List<String> products = [];
   bool loading = false;
-  List<String> acc = ['C', 'R', 'U', 'D', 'F'];
+  List<String> acc = ['C', 'R', 'U', 'D', 'F', 'FC'];
   String test = '';
   List<String> itemName = [];
 
@@ -47,6 +47,25 @@ class BussinessDao extends ChangeNotifier {
 
     loading = false;
     notifyListeners();
+  }
+
+  Future<int> filterCustomer(String cus) async {
+    loading = true;
+    notifyListeners();
+
+    var data = await http.get(
+      Uri.parse('$apiUrl${acc[5]}&cus=$cus'),
+    );
+    if (data.body == null || data.body.isEmpty) {
+      loading = false;
+      notifyListeners();
+      // print(data.body);
+      return 0;
+    } else {
+      loading = false;
+      notifyListeners();
+      return int.parse(data.body);
+    }
   }
 
   void filterBussiness(String category) async {
@@ -111,5 +130,26 @@ class BussinessDao extends ChangeNotifier {
     }
     // print(products);
     return products;
+  }
+
+  Future<bool> updateCustomer(String data) async {
+    loading = true;
+    notifyListeners();
+
+    var response = await http.get(
+      Uri.parse('$apiUrl${acc[2]}&tbl=Customers&data=$data'),
+    );
+
+    if (response.statusCode == 200) {
+      loading = false;
+      notifyListeners();
+
+      return true;
+    } else {
+      loading = false;
+      notifyListeners();
+
+      return false;
+    }
   }
 }
