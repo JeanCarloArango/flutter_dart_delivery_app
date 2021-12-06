@@ -12,7 +12,8 @@ class Bussiness {
     required this.category,
     required this.LinkWeb,
     required this.Address,
-    required this.Ubication,
+    required this.latitude,
+    required this.longitude,
     required this.Cellphone,
     required this.Phone,
     required this.Products,
@@ -26,7 +27,8 @@ class Bussiness {
   String category;
   String LinkWeb;
   String Address;
-  String Ubication;
+  double latitude;
+  double longitude;
   int Cellphone;
   int Phone;
   String Products;
@@ -40,7 +42,8 @@ class Bussiness {
         category: json["Category"],
         LinkWeb: json["b_linkWeb"],
         Address: json["b_address"],
-        Ubication: json["b_ubication"],
+        latitude: json["b_ubication_lat"],
+        longitude: json["b_ubication_lon"],
         Cellphone: json["b_celphone"],
         Phone: json["b_phone"],
         Products: json["b_productos"],
@@ -55,7 +58,8 @@ class Bussiness {
         "Category": category,
         "b_linkWeb": LinkWeb,
         "b_address": Address,
-        "b_ubication": Ubication,
+        "b_ubication_lat": latitude,
+        "b_ubication_lon": longitude,
         "b_celphone": Cellphone,
         "b_phone": Phone,
         "b_productos": Products,

@@ -11,15 +11,14 @@ class BussinessItemWidget extends StatelessWidget {
 
   void showBussinessInfo(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(30),
         ),
       ),
-      builder: (_) {
-        return BussinessInfoWidget(bussiness: bussiness);
-      },
+      builder: (_) => BussinessInfoWidget(bussiness: bussiness),
     );
   }
 

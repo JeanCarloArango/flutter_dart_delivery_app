@@ -13,6 +13,7 @@ class BussinessInfoWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeText(
@@ -65,15 +66,21 @@ class BussinessInfoWidget extends StatelessWidget {
               },
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: bussiness.Images.split(';').length,
-              itemBuilder: (context, index) {
-                return Image.network(
-                  bussiness.Images.split(';')[index],
-                );
-              },
+          SizedBox(
+            height: screenHeight(context) * 0.3,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+              ),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: bussiness.Images.split(';').length,
+                itemBuilder: (context, index) {
+                  return Image.network(
+                    bussiness.Images.split(';')[index],
+                  );
+                },
+              ),
             ),
           )
         ],
