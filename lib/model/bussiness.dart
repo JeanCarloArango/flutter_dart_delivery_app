@@ -27,8 +27,8 @@ class Bussiness {
   String category;
   String LinkWeb;
   String Address;
-  double latitude;
-  double longitude;
+  String latitude;
+  String longitude;
   int Cellphone;
   int Phone;
   String Products;
@@ -42,8 +42,8 @@ class Bussiness {
         category: json["Category"],
         LinkWeb: json["b_linkWeb"],
         Address: json["b_address"],
-        latitude: json["b_ubication_lat"],
-        longitude: json["b_ubication_lon"],
+        latitude: json["b_ubication_lat"].toString(),
+        longitude: json["b_ubication_lon"].toString(),
         Cellphone: json["b_celphone"],
         Phone: json["b_phone"],
         Products: json["b_productos"],
