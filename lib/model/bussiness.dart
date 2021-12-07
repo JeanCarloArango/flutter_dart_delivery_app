@@ -29,8 +29,8 @@ class Bussiness {
   String Address;
   String latitude;
   String longitude;
-  int Cellphone;
-  int Phone;
+  String Cellphone;
+  String Phone;
   String Products;
   String Logo;
   String Images;

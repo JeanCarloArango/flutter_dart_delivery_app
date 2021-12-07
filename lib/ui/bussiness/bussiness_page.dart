@@ -55,19 +55,20 @@ class _BussinessWidgetState extends State<BussinessWidget> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: SizedBox(
-                      height: screenHeight(context) * 0.05,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: bd.categories.length,
-                        itemBuilder: (context, index) {
-                          final category = bd.categories[index];
-                          // print(category.name);
-                          return CategoryBoxWidget(
-                            text: category.name,
-                            onTap: () => bd.filterBussiness(category.name),
-                          );
-                        },
-                      ),),
+                    height: screenHeight(context) * 0.05,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: bd.categories.length,
+                      itemBuilder: (context, index) {
+                        final category = bd.categories[index];
+                        // print(category.name);
+                        return CategoryBoxWidget(
+                          text: category.name,
+                          onTap: () => bd.filterBussiness(category.name),
+                        );
+                      },
+                    ),
+                  ),
                 ),
                 Expanded(
                   child: bd.loading

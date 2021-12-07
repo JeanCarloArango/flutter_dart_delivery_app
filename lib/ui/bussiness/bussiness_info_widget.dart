@@ -13,9 +13,9 @@ class BussinessInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        // mainAxisSize: MainAxisSize.min,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AutoSizeText(
             bussiness.name,
@@ -85,7 +85,7 @@ class BussinessInfoWidget extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: screenHeight(context) * 0.3,
+            height: screenHeight(context) * 0.5,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 10,

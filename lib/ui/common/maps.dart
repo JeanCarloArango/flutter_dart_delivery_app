@@ -18,21 +18,37 @@ class MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget._bussiness.latitude);
+    print(widget._bussiness.longitude);
     final cor = LatLng(
-      double.parse(widget._bussiness.latitude),
-      double.parse(widget._bussiness.longitude),
+      double.parse(widget._bussiness.latitude.trim()),
+      double.parse(widget._bussiness.longitude.trim()),
     );
 
-    final CameraPosition _kGooglePlex = CameraPosition(
+    final CameraPosition cp = CameraPosition(
       target: cor,
-      zoom: 14.4746,
+      // target: LatLng(37.42796133580664, -122.085749655962),
+      zoom: 20,
     );
+
+    final mk = Marker(
+      // This marker id can be anything that uniquely identifies each marker.
+      markerId: MarkerId(widget._bussiness.name),
+      position: cor,
+      infoWindow: InfoWindow(
+        title: widget._bussiness.name,
+        snippet: widget._bussiness.type,
+      ),
+      icon: BitmapDescriptor.defaultMarker,
+    );
+
     return GoogleMap(
-      mapType: MapType.satellite,
-      initialCameraPosition: _kGooglePlex,
+      mapType: MapType.normal,
+      initialCameraPosition: cp,
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
       },
+      markers: {mk},
     );
   }
 }
