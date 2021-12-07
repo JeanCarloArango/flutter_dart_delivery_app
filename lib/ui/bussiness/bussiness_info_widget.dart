@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/model/bussiness.dart';
+import 'package:delivery_app/ui/common/maps.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -82,7 +83,16 @@ class BussinessInfoWidget extends StatelessWidget {
                 },
               ),
             ),
-          )
+          ),
+          SizedBox(
+            height: screenHeight(context) * 0.3,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+              ),
+              child: Maps(bussiness),
+            ),
+          ),
         ],
       ),
     );
