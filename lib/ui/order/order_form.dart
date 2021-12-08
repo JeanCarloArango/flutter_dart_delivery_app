@@ -15,11 +15,13 @@ class _OrderFormState extends State<OrderForm> {
   final _orderK = GlobalKey<FormState>();
   String? _dropdownBussValue;
   String? _dropdownPrValue;
+  double _currentSliderValue = 1;
   var _cstmrDni;
   var _bussinessName;
   var _productSelected;
   var _quantity;
-  int? _total;
+  String _prCant = '1';
+  double? _total;
 
   @override
   void initState() {
@@ -153,6 +155,7 @@ class _OrderFormState extends State<OrderForm> {
                         onChanged: (String? newValue) {
                           setState(() {
                             _dropdownPrValue = newValue!;
+                            _prCant = newValue.split('-')[4];
                           });
                         },
                         hint: Center(
@@ -169,37 +172,68 @@ class _OrderFormState extends State<OrderForm> {
                       const SizedBox(
                         height: 20,
                       ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Dirección no es valida';
-                          } else {
-                            setState(
-                              () {
-                                _quantity = value;
-                              },
-                            );
-                          }
-                          return null;
-                        },
+                      Center(
+                        child: AutoSizeText(
+                          _currentSliderValue.round().toString(),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                          maxFontSize: 30,
+                          minFontSize: 25,
+                          maxLines: 1,
+                        ),
+                      ),
+                      Slider(
+                        activeColor: mainColor,
+                        min: 1,
+                        max: double.parse(_prCant),
+                        value: _currentSliderValue,
+                        divisions: 100,
                         onChanged: (value) {
-                          if (value == null || value.isEmpty) {
-                            value = '0';
-                          }
-                          print(value);
                           setState(
                             () {
-                              _total =
-                                  int.parse(_dropdownPrValue!.split('-')[3]) *
-                                      int.parse(value);
+                              _currentSliderValue = value;
+                              _quantity = value;
+                              _total = double.parse(
+                                      _dropdownPrValue!.split('-')[3]) *
+                                  value;
                             },
                           );
                         },
-                        decoration: InputDecoration(
-                          hintText: 'Cantidad: ',
-                          hintStyle: TextStyle(fontSize: 20),
-                        ),
                       ),
+                      // TextFormField(
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'Dirección no es valida';
+                      //     } else {
+                      //       setState(
+                      //         () {
+                      //           _quantity = value;
+                      //         },
+                      //       );
+                      //     }
+                      //     return null;
+                      //   },
+                      //   onChanged: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       value = '0';
+                      //     }
+                      //     print(value);
+                      //     setState(
+                      //       () {
+                      //         _total =
+                      //             int.parse(_dropdownPrValue!.split('-')[3]) *
+                      //                 int.parse(value);
+                      //       },
+                      //     );
+                      //   },
+                      //   decoration: InputDecoration(
+                      //     hintText: 'Cantidad: ',
+                      //     hintStyle: TextStyle(fontSize: 20),
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 20,
                       ),
@@ -233,7 +267,7 @@ class _OrderFormState extends State<OrderForm> {
                                   minFontSize: 20,
                                 )
                               : AutoSizeText(
-                                  _total.toString(),
+                                  _total!.round().toString(),
                                   style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold),
@@ -301,8 +335,11 @@ class _OrderFormState extends State<OrderForm> {
                             minFontSize: 20,
                           ),
                         ),
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(mainColor),
+                        style: ElevatedButton.styleFrom(
+                          primary: mainColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
                         ),
                       ),
                     ],
