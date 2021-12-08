@@ -38,6 +38,7 @@ dependencies:
   http: any
   sqflite: ^2.0.0+4
   google_maps_flutter: ^2.1.1
+  flutter_google_street_view: ^2.2.2
 
 dev_dependencies:
   flutter_test:
