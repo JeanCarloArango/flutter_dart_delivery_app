@@ -56,7 +56,7 @@ class BussinessInfoWidget extends StatelessWidget {
               itemCount: bussiness.Products.split(';').length,
               itemBuilder: (context, index) {
                 return AutoSizeText(
-                  bussiness.Products.split(';')[index],
+                  '${bussiness.Products.split(';')[index].split('-')[1]} ${bussiness.Products.split(';')[index].split('-')[3]}',
                   style: TextStyle(
                     fontSize: 24,
                   ),

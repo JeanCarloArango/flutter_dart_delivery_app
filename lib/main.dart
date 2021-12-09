@@ -20,11 +20,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Delivery App',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Arvo',
       ),
       home: const HomePage(),
     );
   }
-  
 }
