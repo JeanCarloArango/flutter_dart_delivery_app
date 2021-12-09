@@ -142,7 +142,7 @@ class _OrderFormState extends State<OrderForm> {
                               value: value,
                               child: Center(
                                 child: AutoSizeText(
-                                  value,
+                                  '${value.split('-')[1]}..........\$${value.split('-')[3]}',
                                   style: TextStyle(fontSize: 20),
                                   maxFontSize: 20,
                                   maxLines: 1,
@@ -153,10 +153,15 @@ class _OrderFormState extends State<OrderForm> {
                           },
                         ).toList(),
                         onChanged: (String? newValue) {
-                          setState(() {
-                            _dropdownPrValue = newValue!;
-                            _prCant = newValue.split('-')[4];
-                          });
+                          setState(
+                            () {
+                              _dropdownPrValue = newValue!;
+                              _prCant = newValue.split('-')[4];
+                              _total = double.parse(
+                                      _dropdownPrValue!.split('-')[3]) *
+                                  _currentSliderValue;
+                            },
+                          );
                         },
                         hint: Center(
                           child: AutoSizeText(
@@ -172,82 +177,94 @@ class _OrderFormState extends State<OrderForm> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Center(
-                        child: AutoSizeText(
-                          _currentSliderValue.round().toString(),
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                          ),
-                          maxFontSize: 30,
-                          minFontSize: 25,
-                          maxLines: 1,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              setState(
-                                () {
-                                  _currentSliderValue -= 1;
-                                  if (_currentSliderValue < 1) {
-                                    _currentSliderValue = 1;
-                                  }
-                                  _total = double.parse(
-                                          _dropdownPrValue!.split('-')[3]) *
-                                      _currentSliderValue;
-                                },
-                              );
-                            },
-                            icon: Icon(
-                              Icons.remove,
+                      _dropdownPrValue == null
+                          ? Container()
+                          : Column(
+                              children: [
+                                Center(
+                                  child: AutoSizeText(
+                                    _currentSliderValue.round().toString(),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                    ),
+                                    maxFontSize: 30,
+                                    minFontSize: 25,
+                                    maxLines: 1,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(
+                                          () {
+                                            _currentSliderValue -= 1;
+                                            if (_currentSliderValue < 1) {
+                                              _currentSliderValue = 1;
+                                            }
+                                            _total = double.parse(
+                                                    _dropdownPrValue!
+                                                        .split('-')[3]) *
+                                                _currentSliderValue;
+                                          },
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.remove,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: screenWidth(context) * 0.65,
+                                      child: Slider(
+                                        activeColor: mainColor,
+                                        min: 1,
+                                        max: double.parse(_prCant),
+                                        divisions: int.parse(_prCant),
+                                        onChanged: (value) {
+                                          setState(
+                                            () {
+                                              _currentSliderValue = value;
+                                              _quantity = value;
+                                              _total = double.parse(
+                                                      _dropdownPrValue!
+                                                          .split('-')[3]) *
+                                                  value;
+                                            },
+                                          );
+                                        },
+                                        value: _currentSliderValue,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(
+                                          () {
+                                            _currentSliderValue += 1;
+                                            if (_currentSliderValue >
+                                                double.parse(_prCant)) {
+                                              _currentSliderValue =
+                                                  double.parse(_prCant);
+                                            }
+                                            _total = double.parse(
+                                                    _dropdownPrValue!
+                                                        .split('-')[3]) *
+                                                _currentSliderValue;
+                                          },
+                                        );
+                                      },
+                                      icon: Icon(
+                                        Icons.add,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ),
-                          SizedBox(
-                            width: screenWidth(context) * 0.65,
-                            child: Slider(
-                              activeColor: mainColor,
-                              min: 1,
-                              max: double.parse(_prCant),
-                              divisions: int.parse(_prCant),
-                              onChanged: (value) {
-                                setState(
-                                  () {
-                                    _currentSliderValue = value;
-                                    _quantity = value;
-                                    _total = double.parse(
-                                            _dropdownPrValue!.split('-')[3]) *
-                                        value;
-                                  },
-                                );
-                              },
-                              value: _currentSliderValue,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              setState(
-                                () {
-                                  _currentSliderValue += 1;
-                                  if (_currentSliderValue >
-                                      double.parse(_prCant)) {
-                                    _currentSliderValue = double.parse(_prCant);
-                                  }
-                                  _total = double.parse(
-                                          _dropdownPrValue!.split('-')[3]) *
-                                      _currentSliderValue;
-                                },
-                              );
-                            },
-                            icon: Icon(
-                              Icons.add,
-                            ),
-                          ),
-                        ],
-                      ),
+
                       // TextFormField(
                       //   validator: (value) {
                       //     if (value == null || value.isEmpty) {
@@ -293,33 +310,37 @@ class _OrderFormState extends State<OrderForm> {
                             maxLines: 1,
                             minFontSize: 20,
                           ),
-                          AutoSizeText(
-                            '\$',
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold),
-                            maxFontSize: 25,
-                            maxLines: 1,
-                            minFontSize: 20,
+                          Row(
+                            children: [
+                              AutoSizeText(
+                                '\$',
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                                maxFontSize: 25,
+                                maxLines: 1,
+                                minFontSize: 20,
+                              ),
+                              _total == null
+                                  ? AutoSizeText(
+                                      '0',
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                      maxFontSize: 25,
+                                      maxLines: 1,
+                                      minFontSize: 20,
+                                    )
+                                  : AutoSizeText(
+                                      _total!.round().toString(),
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold),
+                                      maxFontSize: 25,
+                                      maxLines: 1,
+                                      minFontSize: 20,
+                                    ),
+                            ],
                           ),
-                          _total == null
-                              ? AutoSizeText(
-                                  '0',
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
-                                  maxFontSize: 25,
-                                  maxLines: 1,
-                                  minFontSize: 20,
-                                )
-                              : AutoSizeText(
-                                  _total!.round().toString(),
-                                  style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
-                                  maxFontSize: 25,
-                                  maxLines: 1,
-                                  minFontSize: 20,
-                                ),
                         ],
                       ),
                       const SizedBox(

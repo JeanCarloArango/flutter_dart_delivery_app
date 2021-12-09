@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "408276265595",
+    "project_id": "stellar-stream-333823",
+    "storage_bucket": "stellar-stream-333823.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408276265595:android:9b5b5e0cd629e46cabd0de",
+        "android_client_info": {
+          "package_name": "com.example.delivery_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408276265595-abfpp79a6ahchn60v8r89ppubafc8com.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.delivery_app",
+            "certificate_hash": "935e23e534c57e8f30cf4bb172bf2b532e15576c"
+          }
+        },
+        {
+          "client_id": "408276265595-tm1futpf7sdolsb5dakt6p8naceueaj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjTCQ8UvSyEl-qZtcV56blDnw-PhDTntY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408276265595-tm1futpf7sdolsb5dakt6p8naceueaj8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
