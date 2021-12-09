@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/ui/common/menu_widget.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
