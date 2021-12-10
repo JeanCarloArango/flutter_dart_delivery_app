@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 
 class PushNotificationService {
+  
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   static String? token;
@@ -14,7 +15,9 @@ class PushNotificationService {
   }
 
   static getNotifications(BuildContext context) async {
+
     await FirebaseMessaging.instance.getInitialMessage();
+
     FirebaseMessaging.onMessage.listen(
       (message) {
         if (message.notification != null) {
@@ -23,6 +26,7 @@ class PushNotificationService {
         }
       },
     );
+
     FirebaseMessaging.onMessageOpenedApp.listen(
       (messagge) {
         final routeMessagge = messagge.data["route"];
