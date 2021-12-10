@@ -1,5 +1,8 @@
+import 'dart:async';
+
+import 'package:delivery_app/services/push_notification_service.dart';
+import 'package:delivery_app/ui/bussiness/bussiness_page.dart';
 import 'package:delivery_app/ui/home_page.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +13,8 @@ Future main() async {
     SystemUiMode.manual,
     overlays: [],
   );
-  await Firebase.initializeApp();
+  // FirebaseAuth auth = FirebaseAuth.instance;
+  await PushNotificationService.initializeApp();
   runApp(
     const MainApp(),
   );
@@ -44,6 +48,7 @@ class _MainAppState extends State<MainApp> {
     );
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,7 +57,11 @@ class _MainAppState extends State<MainApp> {
       theme: ThemeData(
         fontFamily: 'Arvo',
       ),
-      home: const HomePage(),
+      initialRoute: "Home",
+      routes: {
+        "BussinessPage": (_) => BussinessWidget(),
+        "Home": (_) => const HomePage(),
+      },
     );
   }
 }
