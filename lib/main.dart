@@ -16,9 +16,34 @@ Future main() async {
   );
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({Key? key}) : super(key: key);
 
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  @override
+  void initState() {
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        if (message.notification != null) {
+          print(message.notification!.body);
+          print(message.notification!.title);
+        }
+      },
+    );
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (messagge) {
+        final routeMessagge = messagge.data["route"];
+        print(routeMessagge);
+        Navigator.of(context).pushNamed(routeMessagge);
+      },
+    );
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
