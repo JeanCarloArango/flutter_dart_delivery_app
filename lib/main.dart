@@ -1,3 +1,4 @@
+import 'package:delivery_app/services/push_notification_service.dart';
 import 'package:delivery_app/ui/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,6 +11,7 @@ Future main() async {
     SystemUiMode.manual,
     overlays: [],
   );
+  PushNotificationService.initializeApp();
   await Firebase.initializeApp();
   runApp(
     const MainApp(),
@@ -30,8 +32,8 @@ class _MainAppState extends State<MainApp> {
     FirebaseMessaging.onMessage.listen(
       (message) {
         if (message.notification != null) {
-          print(message.notification!.body);
           print(message.notification!.title);
+          print(message.notification!.body);
         }
       },
     );

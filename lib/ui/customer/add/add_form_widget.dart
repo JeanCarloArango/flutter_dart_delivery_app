@@ -14,6 +14,7 @@ class _AddFormWidgetState extends State<AddFormWidget> {
   final _formK = GlobalKey<FormState>();
 
   final dao = BussinessDao();
+  var _dni;
   var _name;
   var _address;
   var _phone;
@@ -29,6 +30,24 @@ class _AddFormWidgetState extends State<AddFormWidget> {
       key: _formK,
       child: ListView(
         children: [
+          TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Cedila no valida';
+              } else {
+                setState(
+                  () {
+                    _dni = value;
+                  },
+                );
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+              hintText: 'Dni: ',
+              hintStyle: hStyle,
+            ),
+          ),
           TextFormField(
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -99,7 +118,7 @@ class _AddFormWidgetState extends State<AddFormWidget> {
           ElevatedButton(
             onPressed: () {
               if (_formK.currentState!.validate()) {
-                String data = '$_name;$_address;$_phone;$_celphone';
+                String data = '$_dni;$_name;$_address;$_phone;$_celphone';
                 dao.insert(data, 'Customers');
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
