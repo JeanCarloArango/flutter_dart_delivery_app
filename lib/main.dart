@@ -1,3 +1,4 @@
+import 'package:delivery_app/services/local_notifications_service.dart';
 import 'package:delivery_app/services/push_notification_service.dart';
 import 'package:delivery_app/ui/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,6 +13,7 @@ Future main() async {
     overlays: [],
   );
   PushNotificationService.initializeApp();
+  LocalNotificationService.initialize();
   await Firebase.initializeApp();
   runApp(
     const MainApp(),
@@ -35,6 +37,7 @@ class _MainAppState extends State<MainApp> {
           print(message.notification!.title);
           print(message.notification!.body);
         }
+        LocalNotificationService.display(message);
       },
     );
     FirebaseMessaging.onMessageOpenedApp.listen(
