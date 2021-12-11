@@ -14,7 +14,7 @@ class LocalNotificationService {
   static void display(RemoteMessage message) async {
     try {
       final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-      const NotificationDetails notificationDetails = NotificationDetails(
+      NotificationDetails notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
           channelId: "Bussiness",
           channelName: "Bussiness channel",

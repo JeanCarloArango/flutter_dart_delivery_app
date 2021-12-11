@@ -12,7 +12,7 @@ Future main() async {
     SystemUiMode.manual,
     overlays: [],
   );
-  PushNotificationService.initializeApp();
+  // PushNotificationService.initializeApp();
   LocalNotificationService.initialize();
   await Firebase.initializeApp();
   runApp(
