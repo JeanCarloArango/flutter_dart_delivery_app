@@ -41,7 +41,7 @@ class _MainAppState extends State<MainApp> {
       (messagge) {
         final routeMessagge = messagge.data["route"];
         print(routeMessagge);
-        // Navigator.of(context).pushNamed(routeMessagge);
+        Navigator.of(context).pushNamed(routeMessagge);
       },
     );
     super.initState();
