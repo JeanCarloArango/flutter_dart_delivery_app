@@ -17,7 +17,11 @@ Future main() async {
     SystemUiMode.manual,
     overlays: [],
   );
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+    ],
+  );
   PushNotificationService.initializeApp();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(handleBackground);
