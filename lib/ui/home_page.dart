@@ -1,8 +1,45 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:delivery_app/services/local_notifications_services.dart';
 import 'package:delivery_app/ui/common/menu_widget.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseMessaging.instance.getInitialMessage().then(
+      (message) {
+        if (message != null) {
+          final routeMessagge = message.data["route"];
+          Navigator.of(context).pushNamed(routeMessagge);
+        }
+      },
+    );
+
+    FirebaseMessaging.onMessage.listen(
+      (message) {
+        if (message.notification != null) {
+          print(message.notification!.body);
+          print(message.notification!.title);
+        }
+        // LocalNotificationsService.display(message);
+      },
+    );
+
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (message) {
+        final routeMessagge = message.data["route"];
+        Navigator.of(context).pushNamed(routeMessagge);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
