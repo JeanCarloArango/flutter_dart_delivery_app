@@ -40,6 +40,12 @@ dependencies:
   google_maps_flutter: ^2.1.1
   firebase_messaging: ^11.2.3
   firebase_core: ^1.10.5
+  flutter_native_splash: ^1.3.2
+
+flutter_native_splash:
+  image: assets/Splash.png
+  color: "FFFFFF"
+  # fill: true
 
 dev_dependencies:
   flutter_test:
