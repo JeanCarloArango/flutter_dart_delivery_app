@@ -37,7 +37,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Arvo',
       ),
-      home: HomePage(),
+      initialRoute: "Home",
       routes: {
         "Home": (_) => HomePage(),
         "BussinessPage": (_) => BussinessWidget(),
