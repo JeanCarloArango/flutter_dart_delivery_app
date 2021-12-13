@@ -1,10 +1,15 @@
-import 'package:delivery_app/services/local_notifications_service.dart';
 import 'package:delivery_app/services/push_notification_service.dart';
+import 'package:delivery_app/ui/bussiness/bussiness_page.dart';
 import 'package:delivery_app/ui/home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+Future<void> handleBackground(RemoteMessage message) async {
+  print(message.data.toString());
+  print(message.notification!.title);
+}
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,43 +17,17 @@ Future main() async {
     SystemUiMode.manual,
     overlays: [],
   );
-  // PushNotificationService.initializeApp();
-  LocalNotificationService.initialize();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  PushNotificationService.initializeApp();
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(handleBackground);
   runApp(
     const MainApp(),
   );
 }
 
-class MainApp extends StatefulWidget {
+class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
-
-  @override
-  State<MainApp> createState() => _MainAppState();
-}
-
-class _MainAppState extends State<MainApp> {
-  @override
-  void initState() {
-    FirebaseMessaging.instance.getInitialMessage();
-    FirebaseMessaging.onMessage.listen(
-      (message) {
-        if (message.notification != null) {
-          print(message.notification!.title);
-          print(message.notification!.body);
-        }
-        LocalNotificationService.display(message);
-      },
-    );
-    FirebaseMessaging.onMessageOpenedApp.listen(
-      (messagge) {
-        final routeMessagge = messagge.data["route"];
-        print(routeMessagge);
-        Navigator.of(context).pushNamed(routeMessagge);
-      },
-    );
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +38,10 @@ class _MainAppState extends State<MainApp> {
         fontFamily: 'Arvo',
       ),
       home: HomePage(),
+      routes: {
+        "Home": (_) => HomePage(),
+        "BussinessPage": (_) => BussinessWidget(),
+      },
     );
   }
 }

@@ -194,73 +194,75 @@ class _OrderFormState extends State<OrderForm> {
                                     maxLines: 1,
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(
-                                          () {
-                                            _currentSliderValue -= 1;
-                                            if (_currentSliderValue < 1) {
-                                              _currentSliderValue = 1;
-                                            }
-                                            _total = double.parse(
-                                                    _dropdownPrValue!
-                                                        .split('-')[3]) *
-                                                _currentSliderValue;
-                                          },
-                                        );
-                                      },
-                                      icon: Icon(
-                                        Icons.remove,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: screenWidth(context) * 0.65,
-                                      child: Slider(
-                                        activeColor: mainColor,
-                                        min: 1,
-                                        max: double.parse(_prCant),
-                                        divisions: int.parse(_prCant),
-                                        onChanged: (value) {
+                                Center(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
                                           setState(
                                             () {
-                                              _currentSliderValue = value;
-                                              _quantity = value;
+                                              _currentSliderValue -= 1;
+                                              if (_currentSliderValue < 1) {
+                                                _currentSliderValue = 1;
+                                              }
                                               _total = double.parse(
                                                       _dropdownPrValue!
                                                           .split('-')[3]) *
-                                                  value;
+                                                  _currentSliderValue;
                                             },
                                           );
                                         },
-                                        value: _currentSliderValue,
+                                        icon: Icon(
+                                          Icons.remove,
+                                        ),
                                       ),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(
-                                          () {
-                                            _currentSliderValue += 1;
-                                            if (_currentSliderValue >
-                                                double.parse(_prCant)) {
-                                              _currentSliderValue =
-                                                  double.parse(_prCant);
-                                            }
-                                            _total = double.parse(
-                                                    _dropdownPrValue!
-                                                        .split('-')[3]) *
-                                                _currentSliderValue;
+                                      SizedBox(
+                                        width: screenWidth(context) * 0.65,
+                                        child: Slider(
+                                          activeColor: mainColor,
+                                          min: 1,
+                                          max: double.parse(_prCant),
+                                          divisions: int.parse(_prCant),
+                                          onChanged: (value) {
+                                            setState(
+                                              () {
+                                                _currentSliderValue = value;
+                                                _quantity = value;
+                                                _total = double.parse(
+                                                        _dropdownPrValue!
+                                                            .split('-')[3]) *
+                                                    value;
+                                              },
+                                            );
                                           },
-                                        );
-                                      },
-                                      icon: Icon(
-                                        Icons.add,
+                                          value: _currentSliderValue,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      IconButton(
+                                        onPressed: () {
+                                          setState(
+                                            () {
+                                              _currentSliderValue += 1;
+                                              if (_currentSliderValue >
+                                                  double.parse(_prCant)) {
+                                                _currentSliderValue =
+                                                    double.parse(_prCant);
+                                              }
+                                              _total = double.parse(
+                                                      _dropdownPrValue!
+                                                          .split('-')[3]) *
+                                                  _currentSliderValue;
+                                            },
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.add,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
