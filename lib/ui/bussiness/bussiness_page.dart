@@ -56,78 +56,78 @@ class _BussinessWidgetState extends State<BussinessWidget> {
     return AnimatedBuilder(
       animation: bd,
       builder: (context, child) {
-        return Scaffold(
-          appBar: AppBar(
-            title: AutoSizeText(
-              'Negocios Registrados',
-              style: TextStyle(
-                fontSize: 25,
-              ),
-              maxLines: 1,
-              maxFontSize: 25,
-              minFontSize: 10,
-            ),
-            backgroundColor: mainColor,
-          ),
-          drawer: MenuWidget(),
-          body: Padding(
-            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-            child: Column(
-              children: [
-                TextFieldWidget(
-                  Icons.search,
-                  'Buscar Negocio',
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: SizedBox(
-                    height: screenHeight(context) * 0.05,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: bd.categories.length,
-                      itemBuilder: (context, index) {
-                        final category = bd.categories[index];
-                        // print(category.name);
-                        return CategoryBoxWidget(
-                          text: category.name,
-                          onTap: () => bd.filterBussiness(category.name),
-                        );
-                      },
+        return connected
+            ? Scaffold(
+                appBar: AppBar(
+                  title: AutoSizeText(
+                    'Negocios Registrados',
+                    style: TextStyle(
+                      fontSize: 25,
                     ),
+                    maxLines: 1,
+                    maxFontSize: 25,
+                    minFontSize: 10,
+                  ),
+                  backgroundColor: mainColor,
+                ),
+                drawer: MenuWidget(),
+                body: Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                  child: Column(
+                    children: [
+                      TextFieldWidget(
+                        Icons.search,
+                        'Buscar Negocio',
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: SizedBox(
+                          height: screenHeight(context) * 0.05,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: bd.categories.length,
+                            itemBuilder: (context, index) {
+                              final category = bd.categories[index];
+                              // print(category.name);
+                              return CategoryBoxWidget(
+                                text: category.name,
+                                onTap: () => bd.filterBussiness(category.name),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: bd.loading
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                  color: mainColor,
+                                ),
+                              )
+                            : ListView.builder(
+                                itemCount: bd.bussinesses.length,
+                                itemBuilder: (context, index) {
+                                  final b = bd.bussinesses[index];
+                                  return BussinessItemWidget(b);
+                                },
+                              ),
+                      ),
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: bd.loading
-                      ? Center(
-                          child: CircularProgressIndicator(
-                            color: mainColor,
-                          ),
-                        )
-                      : !connected
-                          ? Center(
-                              child: AutoSizeText(
-                                'No Tienes Conexion a internet😥',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                                maxFontSize: 20,
-                                minFontSize: 15,
-                                maxLines: 1,
-                              ),
-                            )
-                          : ListView.builder(
-                              itemCount: bd.bussinesses.length,
-                              itemBuilder: (context, index) {
-                                final b = bd.bussinesses[index];
-                                return BussinessItemWidget(b);
-                              },
-                            ),
+                floatingActionButton: HomeButton(),
+              )
+            : Scaffold(
+                body: Center(
+                  child: AutoSizeText(
+                    'Conectate a una red (WI-FI / MOVIL)',
+                    style: TextStyle(fontSize: 20),
+                    maxFontSize: 20,
+                    minFontSize: 15,
+                    maxLines: 1,
+                  ),
                 ),
-              ],
-            ),
-          ),
-          floatingActionButton: HomeButton(),
-        );
+              );
       },
     );
   }
