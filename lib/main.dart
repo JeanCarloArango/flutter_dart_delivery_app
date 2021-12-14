@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:delivery_app/services/push_notification_service.dart';
 import 'package:delivery_app/ui/bussiness/bussiness_page.dart';
 import 'package:delivery_app/ui/home_page.dart';
@@ -23,6 +24,7 @@ Future main() async {
       DeviceOrientation.portraitUp,
     ],
   );
+
   PushNotificationService.initializeApp();
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(handleBackground);

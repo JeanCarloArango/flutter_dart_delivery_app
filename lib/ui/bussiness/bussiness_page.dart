@@ -77,13 +77,25 @@ class _BussinessWidgetState extends State<BussinessWidget> {
                             color: mainColor,
                           ),
                         )
-                      : ListView.builder(
-                          itemCount: bd.bussinesses.length,
-                          itemBuilder: (context, index) {
-                            final b = bd.bussinesses[index];
-                            return BussinessItemWidget(b);
-                          },
-                        ),
+                      : bd.bussinesses.isEmpty
+                          ? Center(
+                              child: AutoSizeText(
+                                'No Tienes Conexion a internet😥',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                                maxFontSize: 20,
+                                minFontSize: 15,
+                                maxLines: 1,
+                              ),
+                            )
+                          : ListView.builder(
+                              itemCount: bd.bussinesses.length,
+                              itemBuilder: (context, index) {
+                                final b = bd.bussinesses[index];
+                                return BussinessItemWidget(b);
+                              },
+                            ),
                 ),
               ],
             ),
