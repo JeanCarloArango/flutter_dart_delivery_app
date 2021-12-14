@@ -1,6 +1,7 @@
 import 'package:delivery_app/services/push_notification_service.dart';
 import 'package:delivery_app/ui/bussiness/bussiness_page.dart';
 import 'package:delivery_app/ui/home_page.dart';
+import 'package:delivery_app/ui/order/order_form.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ class MainApp extends StatelessWidget {
       routes: {
         "Home": (_) => HomePage(),
         "BussinessPage": (_) => BussinessWidget(),
+        "Order": (_) => OrderForm(),
       },
     );
   }
