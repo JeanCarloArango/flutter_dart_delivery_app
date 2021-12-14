@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:delivery_app/persistence/bussiness_dao.dart';
 import 'package:delivery_app/ui/bussiness/bussiness_item_widget.dart';
 import 'package:delivery_app/ui/common/category/category_box_widget.dart';
@@ -7,6 +8,7 @@ import 'package:delivery_app/ui/common/menu_widget.dart';
 import 'package:delivery_app/ui/common/text_field_widget.dart';
 import 'package:delivery_app/ui/ui_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class BussinessWidget extends StatefulWidget {
   BussinessWidget({Key? key}) : super(key: key);
@@ -18,8 +20,32 @@ class BussinessWidget extends StatefulWidget {
 class _BussinessWidgetState extends State<BussinessWidget> {
   final bd = BussinessDao();
 
+  ConnectivityResult res = ConnectivityResult.none;
+  bool connected = false;
+  bool hasInternet = false;
+
+  void checkConnection() async {
+    res = await Connectivity().checkConnectivity();
+
+    if (res == ConnectivityResult.wifi || res == ConnectivityResult.mobile) {
+      connected = true;
+    } else {
+      connected = false;
+    }
+  }
+
   @override
   void initState() {
+    checkConnection();
+    InternetConnectionChecker().onStatusChange.listen(
+      (status) {
+        final hasInternet = status == InternetConnectionStatus.connected;
+        setState(() {
+          checkConnection();
+          this.hasInternet = hasInternet;
+        });
+      },
+    );
     bd.requestCategories();
     bd.requestBussiness();
     super.initState();
@@ -77,7 +103,7 @@ class _BussinessWidgetState extends State<BussinessWidget> {
                             color: mainColor,
                           ),
                         )
-                      : bd.bussinesses.isEmpty
+                      : !connected
                           ? Center(
                               child: AutoSizeText(
                                 'No Tienes Conexion a internet😥',
